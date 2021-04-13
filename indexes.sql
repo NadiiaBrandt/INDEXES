@@ -5,12 +5,8 @@ CREATE TABLE dbo.Customer
 	,LastName varchar(50)
 	,Email varchar(100)
 	,ModifiedDate date
-	,PRIMARY KEY NONCLUSTERED (CustomerID)
+	,PRIMARY KEY CLUSTERED (CustomerID)
 	);
-GO
-CREATE CLUSTERED INDEX CIX_Customer
-	ON dbo.Customer(CustomerID)
-	;
 GO
 -----------------------------------1.2--------------------------------------
 CREATE NONCLUSTERED INDEX IX_Customer
@@ -55,8 +51,8 @@ DROP INDEX CI_CustomerID
 	ON dbo.Customer2;
 GO
 -----------------------------------1.7--------------------------------------
-ALTER TABLE dbo.Customer2
-ADD CONSTRAINT AK_Customer_Email UNIQUE(Email);
+
+CREATE UNIQUE NONCLUSTERED INDEX AK_Customer_Email ON dbo.Customer2 (Email);
 GO
 -----------------------------------1.8--------------------------------------
 CREATE NONCLUSTERED INDEX IX_Customer2_FILL 
